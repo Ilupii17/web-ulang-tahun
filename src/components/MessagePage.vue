@@ -65,30 +65,43 @@ const currentSlide = ref(0)
 // Setiap array adalah 1 slide, bisa berisi beberapa paragraf
 const messages = ref([
   [
-    'Selamat ulang tahun! 🎉',
-    'Hari ini adalah hari spesial untukmu, dan aku ingin kamu tahu betapa berartinya kehadiranmu dalam hidup ini.',
+    'read it slowly :)'
+  ],
+  [
+    'Selamat ulang tahun firahhh! 🎉',
+    'Hari ini adalah hari spesial untukmu, dan aku cuma pengen kamu tahu betapa berartinya kehadiranmu dalam hidup ini. eaa tapi jujur',
     'Semoga di usia yang baru ini, kamu selalu diberkahi dengan kebahagiaan yang melimpah.'
   ],
   [
-    'Setiap tahun yang berlalu membuatmu semakin dewasa dan bijaksana.',
-    'Kamu adalah pribadi yang luar biasa, dengan segala kelebihan dan keunikanmu.',
+    'Semoga Allah selalu memberikan kesehatan',
+    'diberikan kekuatan hati yang lapang untuk menerima semua takdir nya,,, aminnnn',
+    'Semoga kamu di berikan kemudahan dalam setiap hal yang kamu lakukan',
+    'tetap jadi anak yang baik buat orang tua dan teman teman mu yaa',
     'Jangan pernah berhenti menjadi dirimu sendiri! ✨'
   ],
   [
-    'Di usia yang baru ini, semoga semua impian dan harapanmu tercapai.',
-    'Semoga kesehatan selalu menyertaimu, dan kebahagiaan selalu ada di setiap langkahmu.',
-    'Teruslah bersinar seperti bintang! 🌟'
+    'i hope you have the greatest year yet and that you get to do as many amazing thing you can dream of',
+    'you are so many amazing ways. you shine like a ing star 🌟 in everything you do',
+    'i hope you have an incredible year! and i hope all your birthday dreams come true :)'
   ],
   [
-    'Terima kasih sudah menjadi bagian dari hidupku.',
-    'Terima kasih untuk semua tawa, cerita, dan momen indah yang kita bagi bersama.',
-    'Aku berharap kita bisa terus menciptakan kenangan indah di tahun-tahun mendatang.'
+    'semoga semesta turut mengaminkan dan bisa mendatangkan hal hal baik buat kamu hari ini besok dan seterusnya',
+    'hari ini jangan sedih sedih okee?? klo ulang tahun harus happy happy yaa ahahahahaha',
+    'i wish your birthday and everyday will be filled with the warmth of sunshine..'
   ],
   [
-    'Selamat ulang tahun sekali lagi! 🎂',
-    'Semoga hari ini dan hari-hari selanjutnya penuh dengan senyuman, cinta, dan keajaiban.',
-    'Dengan penuh kasih sayang,',
-    '❤️ Seseorang yang peduli ❤️'
+    'Terima kasih sudah menjadi bagian dari hidupku :)',
+    'aku harap kamu bisa bahagia disana hihi',
+    'selamat ulang tahun sekali lagiii',
+  ],
+  [
+    'last'
+  ],
+  [
+    'kamu adalah keindahan semesta dalam bentuk lainnn ❤️❤️',
+    'Semoga hari ini dan hari-hari selanjutnya penuh dengan senyuman',
+    'loved u',
+    'dari aku yang pernah singgah di hidup mu :)'
   ]
 ])
 

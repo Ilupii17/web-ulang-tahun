@@ -18,7 +18,6 @@
         </transition>
       </div>
 
-      <!-- Navigation -->
       <div class="navigation">
         <button 
           @click="prevSlide" 
@@ -100,7 +99,7 @@ const messages = ref([
   [
     'kamu adalah keindahan semesta dalam bentuk lainnn ❤️❤️',
     'Semoga hari ini dan hari-hari selanjutnya penuh dengan senyuman',
-    'loved u',
+    'loved you',
     'dari aku yang pernah singgah di hidup mu :)'
   ]
 ])
@@ -147,15 +146,16 @@ const getHeartStyle = (i) => {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 2rem;
+  padding: 1rem;
+  box-sizing: border-box;
 }
 
 .back-button {
   position: fixed;
-  top: 30px;
-  left: 30px;
-  padding: 12px 24px;
-  font-size: 1.1rem;
+  top: 20px;
+  left: 20px;
+  padding: 10px 20px;
+  font-size: 1rem;
   font-family: 'Playfair Display', serif;
   background: rgba(255, 255, 255, 0.1);
   color: white;
@@ -180,7 +180,7 @@ const getHeartStyle = (i) => {
   backdrop-filter: blur(20px);
   border: 2px solid rgba(255, 255, 255, 0.1);
   border-radius: 30px;
-  padding: 3rem;
+  padding: 2rem;
   box-shadow: 0 20px 60px rgba(255, 105, 180, 0.3);
   position: relative;
   overflow: hidden;
@@ -191,10 +191,10 @@ const getHeartStyle = (i) => {
 
 .message-title {
   font-family: 'Dancing Script', cursive;
-  font-size: 3rem;
+  font-size: 2.8rem;
   color: #ff69b4;
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   text-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
 }
 
@@ -204,8 +204,8 @@ const getHeartStyle = (i) => {
   align-items: center;
   justify-content: center;
   color: white;
-  line-height: 2;
-  min-height: 300px;
+  line-height: 1.9;
+  min-height: 250px;
 }
 
 .slide {
@@ -213,11 +213,15 @@ const getHeartStyle = (i) => {
 }
 
 .message-text {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   margin-bottom: 1.5rem;
   text-align: center;
   animation: fadeInUp 0.8s ease-out forwards;
   opacity: 0;
+}
+
+.message-text:last-child {
+  margin-bottom: 0;
 }
 
 .navigation {
@@ -225,7 +229,7 @@ const getHeartStyle = (i) => {
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
-  margin-top: 2rem;
+  margin-top: auto;
   padding-top: 2rem;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
@@ -241,6 +245,7 @@ const getHeartStyle = (i) => {
   cursor: pointer;
   transition: all 0.3s ease;
   font-weight: 600;
+  white-space: nowrap;
 }
 
 .nav-button:hover:not(.disabled) {
@@ -252,6 +257,8 @@ const getHeartStyle = (i) => {
 .nav-button.disabled {
   opacity: 0.3;
   cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
 }
 
 .dots {
@@ -259,6 +266,7 @@ const getHeartStyle = (i) => {
   gap: 10px;
   justify-content: center;
   flex: 1;
+  flex-wrap: wrap;
 }
 
 .dot {
@@ -301,7 +309,6 @@ const getHeartStyle = (i) => {
   animation: fadeIn 1.5s ease-in;
 }
 
-/* Slide transitions */
 .slide-enter-active, .slide-leave-active {
   transition: all 0.5s ease;
 }
@@ -350,36 +357,43 @@ const getHeartStyle = (i) => {
 @media (max-width: 768px) {
   .message-container {
     padding: 2rem 1.5rem;
-    min-height: 450px;
+    min-height: 90vh;
+    max-height: 95vh;
   }
   
   .message-title {
     font-size: 2rem;
+    margin-bottom: 1rem;
   }
   
   .message-text {
     font-size: 1.1rem;
+    line-height: 1.8;
   }
   
   .back-button {
-    top: 20px;
-    left: 20px;
-    padding: 10px 20px;
-    font-size: 1rem;
+    top: 15px;
+    left: 15px;
+    padding: 8px 16px;
+    font-size: 0.9rem;
   }
 
   .navigation {
     flex-direction: column;
     gap: 1.5rem;
+    padding-top: 1.5rem;
+    margin-top: 1.5rem;
   }
 
   .nav-button {
     width: 100%;
     padding: 15px;
+    font-size: 1.1rem;
   }
 
   .dots {
     order: -1;
+    padding-bottom: 0.5rem;
   }
 }
 </style>

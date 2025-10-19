@@ -1,15 +1,31 @@
 <template>
   <div class="app">
-    <FireworksCanvas />
-    <StarField />
-    <BirthdayTitle />
+    <div v-if="currentPage === 'home'">
+      <FireworksCanvas />
+      <StarField />
+      <BirthdayTitle />
+    </div>
+    <MessagePage v-else-if="currentPage === 'message'" />
   </div>
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue'
 import BirthdayTitle from './components/BirthdayTitle.vue'
 import StarField from './components/StarField.vue'
 import FireworksCanvas from './components/FireworksCanvas.vue'
+import MessagePage from './components/MessagePage.vue'
+
+const currentPage = ref('home')
+
+const updatePage = () => {
+  currentPage.value = window.location.hash === '#message' ? 'message' : 'home'
+}
+
+onMounted(() => {
+  updatePage()
+  window.addEventListener('hashchange', updatePage)
+})
 </script>
 
 <style>

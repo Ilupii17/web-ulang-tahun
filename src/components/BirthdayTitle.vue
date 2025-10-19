@@ -1,12 +1,18 @@
 <template>
   <div class="container">
-    <h1>🎂 Selamat Ulang Tahun! 🎂</h1>
-    <p class="subtitle">Selamat merayakan hari spesialmu! ✨</p>
+    <h1 class="fade-in">🎂 Selamat Ulang Tahun! 🎂</h1>
+    <p class="subtitle fade-in-delay">Selamat merayakan hari spesialmu! ✨</p>
+    <button @click="goToMessage" class="message-button fade-in-delay-2">
+      Lihat Pesan Spesial 💌
+    </button>
   </div>
 </template>
 
 <script setup>
-// Component untuk menampilkan judul ulang tahun
+const goToMessage = () => {
+  // Emit event ke parent atau gunakan router
+  window.location.hash = '#message'
+}
 </script>
 
 <style scoped>
@@ -19,7 +25,6 @@
   justify-content: center;
   align-items: center;
   z-index: 10;
-  pointer-events: none;
 }
 
 h1 {
@@ -33,12 +38,63 @@ h1 {
   letter-spacing: 2px;
 }
 
+.fade-in {
+  animation: fadeIn 2s ease-in, glow 2s ease-in-out infinite;
+}
+
+.fade-in-delay {
+  opacity: 0;
+  animation: fadeIn 2s ease-in 0.5s forwards;
+}
+
+.fade-in-delay-2 {
+  opacity: 0;
+  animation: fadeIn 2s ease-in 1s forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .subtitle {
   font-size: 1.5rem;
   color: rgba(255, 255, 255, 0.9);
   text-align: center;
   padding: 0 2rem;
   letter-spacing: 1px;
+  margin-bottom: 2rem;
+}
+
+.message-button {
+  padding: 15px 40px;
+  font-size: 1.2rem;
+  font-family: 'Playfair Display', serif;
+  background: linear-gradient(135deg, #ff69b4, #ff1493);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
+  pointer-events: auto;
+  letter-spacing: 1px;
+}
+
+.message-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(255, 105, 180, 0.6);
+  background: linear-gradient(135deg, #ff1493, #ff69b4);
+}
+
+.message-button:active {
+  transform: translateY(-1px);
 }
 
 @keyframes glow {
@@ -56,6 +112,10 @@ h1 {
   }
   .subtitle {
     font-size: 1.2rem;
+  }
+  .message-button {
+    font-size: 1rem;
+    padding: 12px 30px;
   }
 }
 </style>

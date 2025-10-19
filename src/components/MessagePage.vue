@@ -6,21 +6,45 @@
       <h2 class="message-title">Pesan Spesial Untukmu 💝</h2>
       
       <div class="message-content">
-        <p class="message-text">
-          Selamat ulang tahun! 🎉
-        </p>
-        <p class="message-text">
-          Semoga di usia yang baru ini, kamu selalu diberkahi dengan kebahagiaan, 
-          kesehatan, dan kesuksesan dalam setiap langkah hidupmu.
-        </p>
-        <p class="message-text">
-          Teruslah menjadi pribadi yang luar biasa seperti sekarang. 
-          Semoga semua impian dan harapanmu tercapai! ✨
-        </p>
-        <p class="message-text signature">
-          Dengan cinta, <br>
-          <strong>Seseorang yang peduli ❤️</strong>
-        </p>
+        <transition name="slide" mode="out-in">
+          <div :key="currentSlide" class="slide">
+            <p v-for="(paragraph, index) in messages[currentSlide]" 
+               :key="index" 
+               class="message-text"
+               :style="{ animationDelay: `${index * 0.2}s` }">
+              {{ paragraph }}
+            </p>
+          </div>
+        </transition>
+      </div>
+
+      <!-- Navigation -->
+      <div class="navigation">
+        <button 
+          @click="prevSlide" 
+          class="nav-button"
+          :disabled="currentSlide === 0"
+          :class="{ disabled: currentSlide === 0 }">
+          ← Sebelumnya
+        </button>
+        
+        <div class="dots">
+          <span 
+            v-for="(msg, index) in messages" 
+            :key="index"
+            class="dot"
+            :class="{ active: currentSlide === index }"
+            @click="goToSlide(index)">
+          </span>
+        </div>
+        
+        <button 
+          @click="nextSlide" 
+          class="nav-button"
+          :disabled="currentSlide === messages.length - 1"
+          :class="{ disabled: currentSlide === messages.length - 1 }">
+          Selanjutnya →
+        </button>
       </div>
 
       <div class="hearts">
@@ -33,6 +57,57 @@
 </template>
 
 <script setup>
+import { ref } from 'vue'
+
+const currentSlide = ref(0)
+
+// KAMU BISA TAMBAH ATAU EDIT PESAN DI SINI!
+// Setiap array adalah 1 slide, bisa berisi beberapa paragraf
+const messages = ref([
+  [
+    'Selamat ulang tahun! 🎉',
+    'Hari ini adalah hari spesial untukmu, dan aku ingin kamu tahu betapa berartinya kehadiranmu dalam hidup ini.',
+    'Semoga di usia yang baru ini, kamu selalu diberkahi dengan kebahagiaan yang melimpah.'
+  ],
+  [
+    'Setiap tahun yang berlalu membuatmu semakin dewasa dan bijaksana.',
+    'Kamu adalah pribadi yang luar biasa, dengan segala kelebihan dan keunikanmu.',
+    'Jangan pernah berhenti menjadi dirimu sendiri! ✨'
+  ],
+  [
+    'Di usia yang baru ini, semoga semua impian dan harapanmu tercapai.',
+    'Semoga kesehatan selalu menyertaimu, dan kebahagiaan selalu ada di setiap langkahmu.',
+    'Teruslah bersinar seperti bintang! 🌟'
+  ],
+  [
+    'Terima kasih sudah menjadi bagian dari hidupku.',
+    'Terima kasih untuk semua tawa, cerita, dan momen indah yang kita bagi bersama.',
+    'Aku berharap kita bisa terus menciptakan kenangan indah di tahun-tahun mendatang.'
+  ],
+  [
+    'Selamat ulang tahun sekali lagi! 🎂',
+    'Semoga hari ini dan hari-hari selanjutnya penuh dengan senyuman, cinta, dan keajaiban.',
+    'Dengan penuh kasih sayang,',
+    '❤️ Seseorang yang peduli ❤️'
+  ]
+])
+
+const nextSlide = () => {
+  if (currentSlide.value < messages.value.length - 1) {
+    currentSlide.value++
+  }
+}
+
+const prevSlide = () => {
+  if (currentSlide.value > 0) {
+    currentSlide.value--
+  }
+}
+
+const goToSlide = (index) => {
+  currentSlide.value = index
+}
+
 const goBack = () => {
   window.location.hash = ''
 }
@@ -86,7 +161,8 @@ const getHeartStyle = (i) => {
 }
 
 .message-container {
-  max-width: 700px;
+  max-width: 800px;
+  width: 100%;
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(20px);
   border: 2px solid rgba(255, 255, 255, 0.1);
@@ -95,6 +171,9 @@ const getHeartStyle = (i) => {
   box-shadow: 0 20px 60px rgba(255, 105, 180, 0.3);
   position: relative;
   overflow: hidden;
+  min-height: 500px;
+  display: flex;
+  flex-direction: column;
 }
 
 .message-title {
@@ -107,38 +186,86 @@ const getHeartStyle = (i) => {
 }
 
 .message-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: white;
   line-height: 2;
+  min-height: 300px;
+}
+
+.slide {
+  width: 100%;
 }
 
 .message-text {
   font-size: 1.3rem;
   margin-bottom: 1.5rem;
   text-align: center;
-  animation: fadeInUp 1s ease-out forwards;
+  animation: fadeInUp 0.8s ease-out forwards;
   opacity: 0;
 }
 
-.message-text:nth-child(1) {
-  animation-delay: 0.2s;
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.message-text:nth-child(2) {
-  animation-delay: 0.4s;
+.nav-button {
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-family: 'Playfair Display', serif;
+  background: #ff69b4;
+  color: white;
+  border: 2px solid #ff1493;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
 }
 
-.message-text:nth-child(3) {
-  animation-delay: 0.6s;
+.nav-button:hover:not(.disabled) {
+  background: #ff1493;
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(255, 105, 180, 0.5);
 }
 
-.message-text:nth-child(4) {
-  animation-delay: 0.8s;
+.nav-button.disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
 }
 
-.signature {
-  font-style: italic;
-  margin-top: 3rem;
-  font-size: 1.2rem;
+.dots {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex: 1;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dot.active {
+  background: #ff69b4;
+  transform: scale(1.3);
+  box-shadow: 0 0 10px rgba(255, 105, 180, 0.8);
+}
+
+.dot:hover {
+  background: rgba(255, 105, 180, 0.7);
+  transform: scale(1.2);
 }
 
 .hearts {
@@ -159,6 +286,21 @@ const getHeartStyle = (i) => {
 
 .fade-in {
   animation: fadeIn 1.5s ease-in;
+}
+
+/* Slide transitions */
+.slide-enter-active, .slide-leave-active {
+  transition: all 0.5s ease;
+}
+
+.slide-enter-from {
+  opacity: 0;
+  transform: translateX(50px);
+}
+
+.slide-leave-to {
+  opacity: 0;
+  transform: translateX(-50px);
 }
 
 @keyframes fadeIn {
@@ -194,7 +336,8 @@ const getHeartStyle = (i) => {
 
 @media (max-width: 768px) {
   .message-container {
-    padding: 2rem;
+    padding: 2rem 1.5rem;
+    min-height: 450px;
   }
   
   .message-title {
@@ -210,6 +353,20 @@ const getHeartStyle = (i) => {
     left: 20px;
     padding: 10px 20px;
     font-size: 1rem;
+  }
+
+  .navigation {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .nav-button {
+    width: 100%;
+    padding: 15px;
+  }
+
+  .dots {
+    order: -1;
   }
 }
 </style>

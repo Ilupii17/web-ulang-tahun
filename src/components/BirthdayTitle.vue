@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <h1 class="fade-in">Selamat Ulang Tahun!</h1>
-    <p class="subtitle fade-in-delay">untuk firah heheh</p>
+    <p class="subtitle fade-in-delay">untuk mu</p>
     <button @click="goToMessage" class="message-button fade-in-delay-2">
       Lihat Pesan Spesial 💌
     </button>
